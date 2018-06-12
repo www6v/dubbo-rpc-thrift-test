@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+	<dubbo:application name="kaige" owner="kaige"/>
+	
+	<!--<dubbo:registry address="zookeeper://localhost:2181?proxy=thrift2" client="curator"/>-->
+	<!--<dubbo:registry address="zookeeper://10.4.65.226:12181?proxy=thrift2" client="curator"/>-->
+
+	<dubbo:registry protocol="zookeeper" address="10.4.65.226:12181?proxy=thrift2" client="curator" timeout="10000" />
+	<dubbo:registry protocol="zookeeper" address="10.4.65.226:12182?proxy=thrift2" client="curator" timeout="10000"/>
+	<dubbo:registry protocol="zookeeper" address="10.4.65.226:12183?proxy=thrift2" client="curator" timeout="10000"/>
+
+	<!--  -->
+	<!-- <dubbo:registry address="multicast://224.5.6.7:1234?proxy=thrift2" file="provider-123.properties"/> -->
+	
+	<!-- 用registry协议配置监视器 -->
+	<!--ww <dubbo:monitor protocol="registry" />  -->
+   
+	<!--ww  <dubbo:protocol  id="thrift_1" name="thrift2"  port="28088" threads="10" dispatcher="message"/> -->
+	<dubbo:protocol  id="thrift_1" name="thrift2"  port="28888" threads="10" dispatcher="message"/>
+
+	<bean id="recognitionService" class="com.lenovo.ar.recognition.RecognitionServerImpl" />
+	<dubbo:service interface="com.lenovo.ar.recognition.RecognitionServer$Iface"
+		ref="recognitionService" protocol="thrift_1" >
+	</dubbo:service>
+
+<!-- 	<dubbo:protocol  id="thrift_2" name="thrift2" port="28090" threads="10" dispatcher="message"/>
+		
+	<bean id="helloService2" class="com.sodao.dubbo.t6.HelloServiceImpl2" /> 
+	<dubbo:service interface="com.sodao.dubbo.t6.HelloService2$Iface"
+		ref="helloService2" protocol="thrift_2" >
+	</dubbo:service> -->
+	
+</beans>
