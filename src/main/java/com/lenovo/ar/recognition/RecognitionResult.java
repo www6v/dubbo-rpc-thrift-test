@@ -6,14 +6,26 @@
  */
 package com.lenovo.ar.recognition;
 
-import org.apache.thrift.protocol.TTupleProtocol;
 import org.apache.thrift.scheme.IScheme;
 import org.apache.thrift.scheme.SchemeFactory;
 import org.apache.thrift.scheme.StandardScheme;
-import org.apache.thrift.scheme.TupleScheme;
 
+import org.apache.thrift.scheme.TupleScheme;
+import org.apache.thrift.protocol.TTupleProtocol;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.EnumMap;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.EnumSet;
+import java.util.Collections;
+import java.util.BitSet;
 import java.nio.ByteBuffer;
-import java.util.*;
+import java.util.Arrays;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RecognitionResult implements org.apache.thrift.TBase<RecognitionResult, RecognitionResult._Fields>, java.io.Serializable, Cloneable {
   private static final org.apache.thrift.protocol.TStruct STRUCT_DESC = new org.apache.thrift.protocol.TStruct("RecognitionResult");
@@ -22,8 +34,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
   private static final org.apache.thrift.protocol.TField TAG_FIELD_DESC = new org.apache.thrift.protocol.TField("tag", org.apache.thrift.protocol.TType.STRING, (short)2);
   private static final org.apache.thrift.protocol.TField TARGET2CAMERA_FIELD_DESC = new org.apache.thrift.protocol.TField("target2camera", org.apache.thrift.protocol.TType.LIST, (short)3);
   private static final org.apache.thrift.protocol.TField FEATURE_URL_FIELD_DESC = new org.apache.thrift.protocol.TField("featureUrl", org.apache.thrift.protocol.TType.STRING, (short)4);
-  private static final org.apache.thrift.protocol.TField MODEL_URL_FIELD_DESC = new org.apache.thrift.protocol.TField("modelUrl", org.apache.thrift.protocol.TType.STRING, (short)5);
-  private static final org.apache.thrift.protocol.TField DATA_FIELD_DESC = new org.apache.thrift.protocol.TField("data", org.apache.thrift.protocol.TType.STRING, (short)6);
 
   private static final Map<Class<? extends IScheme>, SchemeFactory> schemes = new HashMap<Class<? extends IScheme>, SchemeFactory>();
   static {
@@ -35,17 +45,13 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
   public String tag; // required
   public List<Double> target2camera; // required
   public String featureUrl; // required
-  public String modelUrl; // required
-  public ByteBuffer data; // required
 
   /** The set of fields this struct contains, along with convenience methods for finding and manipulating them. */
   public enum _Fields implements org.apache.thrift.TFieldIdEnum {
     SUCCESS((short)1, "success"),
     TAG((short)2, "tag"),
     TARGET2CAMERA((short)3, "target2camera"),
-    FEATURE_URL((short)4, "featureUrl"),
-    MODEL_URL((short)5, "modelUrl"),
-    DATA((short)6, "data");
+    FEATURE_URL((short)4, "featureUrl");
 
     private static final Map<String, _Fields> byName = new HashMap<String, _Fields>();
 
@@ -68,10 +74,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
           return TARGET2CAMERA;
         case 4: // FEATURE_URL
           return FEATURE_URL;
-        case 5: // MODEL_URL
-          return MODEL_URL;
-        case 6: // DATA
-          return DATA;
         default:
           return null;
       }
@@ -126,10 +128,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.DOUBLE))));
     tmpMap.put(_Fields.FEATURE_URL, new org.apache.thrift.meta_data.FieldMetaData("featureUrl", org.apache.thrift.TFieldRequirementType.DEFAULT, 
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.MODEL_URL, new org.apache.thrift.meta_data.FieldMetaData("modelUrl", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.DATA, new org.apache.thrift.meta_data.FieldMetaData("data", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , true)));
     metaDataMap = Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(RecognitionResult.class, metaDataMap);
   }
@@ -141,9 +139,7 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
     boolean success,
     String tag,
     List<Double> target2camera,
-    String featureUrl,
-    String modelUrl,
-    ByteBuffer data)
+    String featureUrl)
   {
     this();
     this.success = success;
@@ -151,8 +147,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
     this.tag = tag;
     this.target2camera = target2camera;
     this.featureUrl = featureUrl;
-    this.modelUrl = modelUrl;
-    this.data = data;
   }
 
   /**
@@ -175,13 +169,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
     if (other.isSetFeatureUrl()) {
       this.featureUrl = other.featureUrl;
     }
-    if (other.isSetModelUrl()) {
-      this.modelUrl = other.modelUrl;
-    }
-    if (other.isSetData()) {
-      this.data = org.apache.thrift.TBaseHelper.copyBinary(other.data);
-;
-    }
   }
 
   public RecognitionResult deepCopy() {
@@ -195,8 +182,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
     this.tag = null;
     this.target2camera = null;
     this.featureUrl = null;
-    this.modelUrl = null;
-    this.data = null;
   }
 
   public boolean isSuccess() {
@@ -309,64 +294,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
     }
   }
 
-  public String getModelUrl() {
-    return this.modelUrl;
-  }
-
-  public RecognitionResult setModelUrl(String modelUrl) {
-    this.modelUrl = modelUrl;
-    return this;
-  }
-
-  public void unsetModelUrl() {
-    this.modelUrl = null;
-  }
-
-  /** Returns true if field modelUrl is set (has been assigned a value) and false otherwise */
-  public boolean isSetModelUrl() {
-    return this.modelUrl != null;
-  }
-
-  public void setModelUrlIsSet(boolean value) {
-    if (!value) {
-      this.modelUrl = null;
-    }
-  }
-
-  public byte[] getData() {
-    setData(org.apache.thrift.TBaseHelper.rightSize(data));
-    return data == null ? null : data.array();
-  }
-
-  public ByteBuffer bufferForData() {
-    return data;
-  }
-
-  public RecognitionResult setData(byte[] data) {
-    setData(data == null ? (ByteBuffer)null : ByteBuffer.wrap(data));
-    return this;
-  }
-
-  public RecognitionResult setData(ByteBuffer data) {
-    this.data = data;
-    return this;
-  }
-
-  public void unsetData() {
-    this.data = null;
-  }
-
-  /** Returns true if field data is set (has been assigned a value) and false otherwise */
-  public boolean isSetData() {
-    return this.data != null;
-  }
-
-  public void setDataIsSet(boolean value) {
-    if (!value) {
-      this.data = null;
-    }
-  }
-
   public void setFieldValue(_Fields field, Object value) {
     switch (field) {
     case SUCCESS:
@@ -401,22 +328,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
       }
       break;
 
-    case MODEL_URL:
-      if (value == null) {
-        unsetModelUrl();
-      } else {
-        setModelUrl((String)value);
-      }
-      break;
-
-    case DATA:
-      if (value == null) {
-        unsetData();
-      } else {
-        setData((ByteBuffer)value);
-      }
-      break;
-
     }
   }
 
@@ -433,12 +344,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
 
     case FEATURE_URL:
       return getFeatureUrl();
-
-    case MODEL_URL:
-      return getModelUrl();
-
-    case DATA:
-      return getData();
 
     }
     throw new IllegalStateException();
@@ -459,10 +364,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
       return isSetTarget2camera();
     case FEATURE_URL:
       return isSetFeatureUrl();
-    case MODEL_URL:
-      return isSetModelUrl();
-    case DATA:
-      return isSetData();
     }
     throw new IllegalStateException();
   }
@@ -513,24 +414,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
       if (!(this_present_featureUrl && that_present_featureUrl))
         return false;
       if (!this.featureUrl.equals(that.featureUrl))
-        return false;
-    }
-
-    boolean this_present_modelUrl = true && this.isSetModelUrl();
-    boolean that_present_modelUrl = true && that.isSetModelUrl();
-    if (this_present_modelUrl || that_present_modelUrl) {
-      if (!(this_present_modelUrl && that_present_modelUrl))
-        return false;
-      if (!this.modelUrl.equals(that.modelUrl))
-        return false;
-    }
-
-    boolean this_present_data = true && this.isSetData();
-    boolean that_present_data = true && that.isSetData();
-    if (this_present_data || that_present_data) {
-      if (!(this_present_data && that_present_data))
-        return false;
-      if (!this.data.equals(that.data))
         return false;
     }
 
@@ -590,26 +473,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
         return lastComparison;
       }
     }
-    lastComparison = Boolean.valueOf(isSetModelUrl()).compareTo(typedOther.isSetModelUrl());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetModelUrl()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.modelUrl, typedOther.modelUrl);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
-    lastComparison = Boolean.valueOf(isSetData()).compareTo(typedOther.isSetData());
-    if (lastComparison != 0) {
-      return lastComparison;
-    }
-    if (isSetData()) {
-      lastComparison = org.apache.thrift.TBaseHelper.compareTo(this.data, typedOther.data);
-      if (lastComparison != 0) {
-        return lastComparison;
-      }
-    }
     return 0;
   }
 
@@ -655,22 +518,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
       sb.append("null");
     } else {
       sb.append(this.featureUrl);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("modelUrl:");
-    if (this.modelUrl == null) {
-      sb.append("null");
-    } else {
-      sb.append(this.modelUrl);
-    }
-    first = false;
-    if (!first) sb.append(", ");
-    sb.append("data:");
-    if (this.data == null) {
-      sb.append("null");
-    } else {
-      org.apache.thrift.TBaseHelper.toString(this.data, sb);
     }
     first = false;
     sb.append(")");
@@ -759,22 +606,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
-          case 5: // MODEL_URL
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.modelUrl = iprot.readString();
-              struct.setModelUrlIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
-          case 6: // DATA
-            if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
-              struct.data = iprot.readBinary();
-              struct.setDataIsSet(true);
-            } else { 
-              org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
-            }
-            break;
           default:
             org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
         }
@@ -815,16 +646,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
         oprot.writeString(struct.featureUrl);
         oprot.writeFieldEnd();
       }
-      if (struct.modelUrl != null) {
-        oprot.writeFieldBegin(MODEL_URL_FIELD_DESC);
-        oprot.writeString(struct.modelUrl);
-        oprot.writeFieldEnd();
-      }
-      if (struct.data != null) {
-        oprot.writeFieldBegin(DATA_FIELD_DESC);
-        oprot.writeBinary(struct.data);
-        oprot.writeFieldEnd();
-      }
       oprot.writeFieldStop();
       oprot.writeStructEnd();
     }
@@ -855,13 +676,7 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
       if (struct.isSetFeatureUrl()) {
         optionals.set(3);
       }
-      if (struct.isSetModelUrl()) {
-        optionals.set(4);
-      }
-      if (struct.isSetData()) {
-        optionals.set(5);
-      }
-      oprot.writeBitSet(optionals, 6);
+      oprot.writeBitSet(optionals, 4);
       if (struct.isSetSuccess()) {
         oprot.writeBool(struct.success);
       }
@@ -880,18 +695,12 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
       if (struct.isSetFeatureUrl()) {
         oprot.writeString(struct.featureUrl);
       }
-      if (struct.isSetModelUrl()) {
-        oprot.writeString(struct.modelUrl);
-      }
-      if (struct.isSetData()) {
-        oprot.writeBinary(struct.data);
-      }
     }
 
     @Override
     public void read(org.apache.thrift.protocol.TProtocol prot, RecognitionResult struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
-      BitSet incoming = iprot.readBitSet(6);
+      BitSet incoming = iprot.readBitSet(4);
       if (incoming.get(0)) {
         struct.success = iprot.readBool();
         struct.setSuccessIsSet(true);
@@ -916,14 +725,6 @@ public class RecognitionResult implements org.apache.thrift.TBase<RecognitionRes
       if (incoming.get(3)) {
         struct.featureUrl = iprot.readString();
         struct.setFeatureUrlIsSet(true);
-      }
-      if (incoming.get(4)) {
-        struct.modelUrl = iprot.readString();
-        struct.setModelUrlIsSet(true);
-      }
-      if (incoming.get(5)) {
-        struct.data = iprot.readBinary();
-        struct.setDataIsSet(true);
       }
     }
   }

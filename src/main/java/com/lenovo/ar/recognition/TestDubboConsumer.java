@@ -26,8 +26,12 @@ public class TestDubboConsumer {
 		for(int i = 0; i<10; i++) {
 //			User user = service.getUser(1, "tom", 24);
 			RecognitionRequest rr=new RecognitionRequest();
-			sw.start("recog" + 1);
+			sw.start("recog" + i);
 			service.recognition(rr);
+			sw.stop();
+
+			sw.start("getFeature" + i);
+			service.getFeature("tag");
 			sw.stop();
 		}
 

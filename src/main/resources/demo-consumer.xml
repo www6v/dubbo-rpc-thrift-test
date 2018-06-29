@@ -13,7 +13,7 @@
 	<!-- <dubbo:registry address="multicast://224.5.6.7:1234?proxy=thrift2"/> -->
 	
 	<dubbo:reference interface="com.lenovo.ar.recognition.RecognitionServer$Iface" async="true"
-		id="recognitionService">
+					 id="recognitionService">
 	</dubbo:reference>
 
 	<!-- <dubbo:reference interface="com.sodao.dubbo.t6.HelloService2$Iface"

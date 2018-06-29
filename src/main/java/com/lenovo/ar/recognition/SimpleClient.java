@@ -43,6 +43,10 @@ public class SimpleClient {
 			sw.start("recog" + i);
 			client1.recognition(rr);
 			sw.stop();
+
+			sw.start("getFeature" + i);
+			client1.getFeature("tagABC");
+			sw.stop();
 		}
 
 		transport.close();

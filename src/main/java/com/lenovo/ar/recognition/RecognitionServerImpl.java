@@ -1,6 +1,5 @@
 package com.lenovo.ar.recognition;
 
-
 import org.apache.thrift.TException;
 
 import java.util.ArrayList;
@@ -10,6 +9,13 @@ import java.util.List;
  * Created by wangwei110 on 2018/6/8.
  */
 public class RecognitionServerImpl implements RecognitionServer.Iface {
+
+    @Override
+    public String getFeature(String tag) throws TException {
+        System.out.println("In getFeature service .");
+        return "mock Feature";
+    }
+
     @Override
     public RecognitionResult recognition(RecognitionRequest request) throws TException {
         String a= "a";
@@ -17,17 +23,14 @@ public class RecognitionServerImpl implements RecognitionServer.Iface {
         l.add(1.2);
         l.add(2.3);
 
-        RecognitionResult rr = new RecognitionResult();
+        RecognitionResult rResult = new RecognitionResult();
 
-        rr.setSuccess(true);
-        rr.setTag("tag1");
-        rr.setFeatureUrl("http://FeatureUrl");
-        rr.setModelUrl("http://ModelUrl");
-        rr.setData(a.getBytes());
-
-        rr.setTarget2camera(l);
+        rResult.setSuccess(true);
+        rResult.setTag("tag1");
+        rResult.setTarget2camera(l);
+        rResult.setFeatureUrl("http://FeatureUrl");
 
         System.out.println("In regco service .");
-        return rr;
+        return rResult;
     }
 }
