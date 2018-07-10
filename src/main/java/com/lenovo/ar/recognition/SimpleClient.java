@@ -10,8 +10,11 @@ import org.springframework.util.StopWatch;
 public class SimpleClient {
 	public static void main(String[] args) throws Exception {
 		
-		TTransport transport = new TSocket("localhost", 28888);//28088
+//		TTransport transport = new TSocket("localhost", 28888);//28088
 //		TTransport transport = new TSocket("localhost", 7911);//28088
+		TTransport transport = new TSocket("10.4.65.121", 28888);//28088  dev
+//		TTransport transport = new TSocket("dev.shai.cloud", 28888);//28088  dev
+
 
 //		TProtocol protocol = new TBinaryProtocol(transport);
 		
